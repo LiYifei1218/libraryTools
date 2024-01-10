@@ -1,5 +1,9 @@
+# bookmarkget.py
+
 import urllib.request
+
 from bs4 import BeautifulSoup
+
 import headers
 
 
@@ -21,7 +25,7 @@ def search_isbn(isbn):
 
     try:
         # 创建请求对象，使用headers模块中的get_headers函数获取头部
-        req = urllib.request.Request(search_url, headers=headers.get_headers())
+        req = urllib.request.Request(search_url, headers=headers.get_shukui_headers())
 
         # 发送请求到搜索页面
         with urllib.request.urlopen(req) as response:
@@ -44,7 +48,7 @@ def search_isbn(isbn):
         details_url = f"https://www.shukui.net{relative_link}"
 
         # 创建详情页面请求对象，再次使用headers模块中的get_headers函数
-        details_req = urllib.request.Request(details_url, headers=headers.get_headers())
+        details_req = urllib.request.Request(details_url, headers=headers.get_shukui_headers())
 
         # 请求书籍详情页面
         with urllib.request.urlopen(details_req) as details_response:

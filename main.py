@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox, scrolledtext, filedialog
+import threading
 import nlc_isbn
 from formatting import format_metadata
 import pyperclip
 import webbrowser
+import bookmarkget
 
 
 def search_isbn():
@@ -11,9 +13,14 @@ def search_isbn():
     log_message("检索 ISBN: " + isbn)
     update_status("正在检索...")
     text_result.delete('1.0', tk.END)
+    text_bookmarks.delete('1.0', tk.END)
     root.update_idletasks()
 
     try:
+        # 使用线程异步获取书签信息
+        threading.Thread(target=lambda: fetch_bookmark_info(isbn), daemon=True).start()
+
+        # 同步执行元数据检索
         metadata = nlc_isbn.isbn2meta(isbn)
         if metadata:
             formatted_result = format_metadata(metadata)
@@ -25,6 +32,14 @@ def search_isbn():
     except Exception as e:
         messagebox.showerror("错误", str(e))
         update_status("检索出错")
+
+
+def fetch_bookmark_info(isbn):
+    try:
+        bookmarks_info = bookmarkget.get_book_details(isbn)
+        text_bookmarks.insert(tk.END, bookmarks_info)
+    except Exception as e:
+        messagebox.showerror("错误", str(e))
 
 
 def copy_to_clipboard():

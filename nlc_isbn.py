@@ -5,7 +5,7 @@ import urllib.request
 
 from bs4 import BeautifulSoup
 
-from headers import get_headers
+from headers import get_opacnlc_headers
 
 # 常量定义：URL
 BASE_URL = "http://opac.nlc.cn/F"
@@ -17,7 +17,7 @@ SEARCH_URL_TEMPLATE = BASE_URL + "?func=find-b&find_code=ISB&request={isbn}&loca
 
 def get_dynamic_url():
     try:
-        response = urllib.request.urlopen(urllib.request.Request(BASE_URL, headers=get_headers()), timeout=10)
+        response = urllib.request.urlopen(urllib.request.Request(BASE_URL, headers=get_opacnlc_headers()), timeout=10)
         response_text = response.read().decode('utf-8')
         dynamic_url_match = re.search(r"http://opac.nlc.cn:80/F/[^\s?]*", response_text)
         if dynamic_url_match:
@@ -51,7 +51,7 @@ def isbn2meta(isbn):
 
     search_url = SEARCH_URL_TEMPLATE.format(isbn=isbn)
     try:
-        response = urllib.request.urlopen(urllib.request.Request(search_url, headers=get_headers()), timeout=10)
+        response = urllib.request.urlopen(urllib.request.Request(search_url, headers=get_opacnlc_headers()), timeout=10)
         response_text = response.read().decode('utf-8')
         soup = BeautifulSoup(response_text, "html.parser")
         return parse_metadata(soup, isbn)

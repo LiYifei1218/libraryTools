@@ -18,11 +18,13 @@ def generate_user_agents(num_agents):
 
 user_agents = generate_user_agents(20)
 
+Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, ' \
+          'application/signed-exchange;v=b3;q=0.7'
 
-def get_headers():
+
+def get_opacnlc_headers():
     return {
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, '
-                  'application/signed-exchange;v=b3;q=0.7',
+        'Accept': Accept,
         'Accept-Encoding': 'gzip, deflate',
         'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
         'Cache-Control': 'max-age=0',
@@ -31,4 +33,17 @@ def get_headers():
         'Proxy-Connection': 'keep-alive',
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': random.choice(user_agents)
+    }
+
+
+def get_shukui_headers():
+    return {
+        'Accept': Accept,
+        'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Cache-Control': 'max-age=0',
+        'DNT': '1',
+        'Host': 'www.shukui.net',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': random.choice(user_agents),
+        'Referer': 'https://www.shukui.net/'
     }
