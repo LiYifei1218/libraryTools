@@ -68,6 +68,10 @@ def open_github():
     webbrowser.open("https://github.com/Hellohistory/EbookDataGeter")
 
 
+def open_gitee():
+    webbrowser.open("https://gitee.com/etojsyc/EbookDataGeter")
+
+
 def log_message(message):
     text_log.insert(tk.END, message + "\n")
 
@@ -130,8 +134,18 @@ text_bookmarks.grid(row=1, column=1, sticky="nsew", padx=10, pady=5)
 text_log = scrolledtext.ScrolledText(root, height=5, font=FONT_NORMAL)
 text_log.grid(row=3, column=0, columnspan=2, sticky="nsew", padx=10, pady=5)
 
-github_link = tk.Label(root, text="Github地址", fg="blue", cursor="hand2", bg=BACKGROUND_COLOR, font=FONT_NORMAL)
-github_link.grid(row=4, column=0, columnspan=2, sticky="se", padx=10, pady=5)
+# 创建一个Frame来包含两个链接
+link_frame = tk.Frame(root, bg=BACKGROUND_COLOR)
+link_frame.grid(row=4, column=1, sticky="se", padx=10, pady=5)
+
+# Gitee 链接
+gitee_link = tk.Label(link_frame, text="Gitee地址", fg="blue", cursor="hand1", bg=BACKGROUND_COLOR, font=FONT_NORMAL)
+gitee_link.pack(side=tk.RIGHT, padx=(2, 0))  # Pack用于在Frame内部排列
+gitee_link.bind("<Button-1>", lambda e: open_gitee())
+
+# Github 链接
+github_link = tk.Label(link_frame, text="Github地址", fg="blue", cursor="hand2", bg=BACKGROUND_COLOR, font=FONT_NORMAL)
+github_link.pack(side=tk.RIGHT, padx=(2, 2))
 github_link.bind("<Button-1>", lambda e: open_github())
 
 root.mainloop()

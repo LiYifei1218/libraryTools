@@ -1,6 +1,7 @@
 import sys
 from cx_Freeze import setup, Executable
 
+# 运行指令: python setup.py build
 build_exe_options = {
     "packages": [
         "os", "tkinter", "random", "re", "urllib.request", "bs4",
@@ -16,7 +17,7 @@ if sys.platform == "win32":
 
 setup(
     name="EbookDataGeter",
-    version="1.0",
+    version="1.1",
     description="EbookDataGeter自由开源",
     options={"build_exe": build_exe_options},
     executables=[Executable("main.py", base=base, icon="logo.ico")]
