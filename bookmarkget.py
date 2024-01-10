@@ -71,5 +71,5 @@ def search_isbn(isbn):
 
 
 # 测试函数
-isbn = "9787111532414"
-print(get_book_details(isbn))
+# isbn = "9787111532414"
+# print(get_book_details(isbn))

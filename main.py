@@ -17,11 +17,11 @@ def search_isbn():
     root.update_idletasks()
 
     try:
-        # 使用线程异步获取书签信息
+        # 启动线程以异步获取书签信息
         threading.Thread(target=lambda: fetch_bookmark_info(isbn), daemon=True).start()
 
-        # 同步执行元数据检索
-        metadata = nlc_isbn.isbn2meta(isbn)
+        # 同步执行元数据检索，并将update_status作为参数传递
+        metadata = nlc_isbn.isbn2meta(isbn, update_status)
         if metadata:
             formatted_result = format_metadata(metadata)
             text_result.insert(tk.END, formatted_result)
@@ -85,7 +85,7 @@ BUTTON_COLOR = "#E0E0E0"
 # 创建主窗口
 root = tk.Tk()
 root.title("EbookDataGeter")
-root.geometry("800x450")
+root.geometry("900x600")
 root.iconbitmap('logo.ico')
 root.configure(bg=BACKGROUND_COLOR)
 
@@ -113,10 +113,12 @@ button_search.pack(side=tk.LEFT, padx=5)
 button_copy = tk.Button(frame, text="复制信息", command=copy_to_clipboard, bg=BUTTON_COLOR, font=FONT_BOLD)
 button_copy.pack(side=tk.LEFT, padx=5)
 
-button_copy_bookmarks = tk.Button(frame, text="复制书签信息", command=copy_bookmarks_to_clipboard, bg=BUTTON_COLOR, font=FONT_BOLD)
+button_copy_bookmarks = tk.Button(frame, text="复制书签信息", command=copy_bookmarks_to_clipboard, bg=BUTTON_COLOR,
+                                  font=FONT_BOLD)
 button_copy_bookmarks.pack(side=tk.LEFT, padx=5)
 
-button_save_bookmarks = tk.Button(frame, text="保存书签信息", command=save_bookmarks_to_file, bg=BUTTON_COLOR, font=FONT_BOLD)
+button_save_bookmarks = tk.Button(frame, text="保存书签信息", command=save_bookmarks_to_file, bg=BUTTON_COLOR,
+                                  font=FONT_BOLD)
 button_save_bookmarks.pack(side=tk.LEFT, padx=5)
 
 text_result = scrolledtext.ScrolledText(root, height=10, font=FONT_NORMAL)

@@ -7,7 +7,6 @@ from bs4 import BeautifulSoup
 
 from headers import get_opacnlc_headers
 
-# 常量定义：URL
 BASE_URL = "http://opac.nlc.cn/F"
 SEARCH_URL_TEMPLATE = BASE_URL + "?func=find-b&find_code=ISB&request={isbn}&local_base=NLC01" + \
                       "&filter_code_1=WLN&filter_request_1=&filter_code_2=WYR&filter_request_2=" + \
@@ -15,37 +14,37 @@ SEARCH_URL_TEMPLATE = BASE_URL + "?func=find-b&find_code=ISB&request={isbn}&loca
                        "&filter_request_5=")
 
 
-def get_dynamic_url():
+def get_dynamic_url(update_status):
     try:
         response = urllib.request.urlopen(urllib.request.Request(BASE_URL, headers=get_opacnlc_headers()), timeout=10)
         response_text = response.read().decode('utf-8')
         dynamic_url_match = re.search(r"http://opac.nlc.cn:80/F/[^\s?]*", response_text)
         if dynamic_url_match:
-            print(f"动态URL: {dynamic_url_match.group(0)}")
+            update_status(f"动态URL: {dynamic_url_match.group(0)}")
             return dynamic_url_match.group(0)
         else:
             raise ValueError("无法找到动态URL")
     except Exception as e:
-        print(f"获取动态URL时出错: {e}")
+        update_status(f"获取动态URL时出错: {e}")
         return None
 
 
-def isbn2meta(isbn):
+def isbn2meta(isbn, update_status):
     if not isinstance(isbn, str):
-        print("ISBN必须是字符串")
+        update_status("ISBN必须是字符串")
         return None
 
     try:
         isbn_match = re.match(r"\d{10,}", isbn).group()
     except AttributeError:
-        print(f"无效的ISBN代码: {isbn}")
+        update_status(f"无效的ISBN代码: {isbn}")
         return None
 
     if isbn_match != isbn:
-        print(f"无效的ISBN代码: {isbn}")
+        update_status(f"无效的ISBN代码: {isbn}")
         return None
 
-    dynamic_url = get_dynamic_url()
+    dynamic_url = get_dynamic_url(update_status)
     if not dynamic_url:
         return None
 
@@ -54,13 +53,13 @@ def isbn2meta(isbn):
         response = urllib.request.urlopen(urllib.request.Request(search_url, headers=get_opacnlc_headers()), timeout=10)
         response_text = response.read().decode('utf-8')
         soup = BeautifulSoup(response_text, "html.parser")
-        return parse_metadata(soup, isbn)
+        return parse_metadata(soup, isbn, update_status)
     except Exception as e:
-        print(f"获取元数据时出错: {e}")
+        update_status(f"获取元数据时出错: {e}")
         return None
 
 
-def parse_metadata(soup, isbn):
+def parse_metadata(soup, isbn, update_status):
     data = {}
     prev_td1 = ''
     prev_td2 = ''
@@ -69,7 +68,8 @@ def parse_metadata(soup, isbn):
         table = soup.find("table", attrs={"id": "td"})
         if not table:
             return None
-    except Exception:
+    except Exception as e:
+        update_status(f"解析元数据时出错: {e}")
         return None
 
     tr_elements = table.find_all('tr')
