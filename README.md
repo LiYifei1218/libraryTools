@@ -22,7 +22,7 @@ EbookDataGeter 是一个基于 [NLCISBNPlugin](https://github.com/DoiiarX/NLCISB
   
 - **图书信息检索**：通过输入 ISBN 号，快速获取图书的详细信息。  
 - **书签检索**：可以检索书签集成到PDF当中
-- **信息展示**：在 GUI 中清晰展示检索到的图书信息。  
+- **信息展示**：在界面中清晰展示检索到的图书信息。  
 - **剪贴板支持**：方便地复制检索结果到剪贴板，以便于进一步使用。  
 
 
@@ -72,7 +72,9 @@ source venv/bin/activate
 5. 最后，运行应用程序。使用以下命令启动应用程序：
 
 ```python
+
 python main.py
+
 ```
 这将在虚拟环境中运行应用程序
 
