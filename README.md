@@ -3,6 +3,12 @@
 EbookDataGeter 是一个基于 [NLCISBNPlugin](https://github.com/DoiiarX/NLCISBNPlugin) 的改进项目，提供了一个简单易用的图书数据获取工具。此项目使用 Tkinter 库构建了一个直观的图形用户界面（GUI），在新版本当中集成了[书葵网](https://www.shukui.net/)的书签检索功能，使得图书信息检索与图书书签检索集成到一起。
   
 在此向`NLCISBNPlugin`与`书葵网`的开发者表达感谢！  
+
+## 软件开源地址
+
+- [GitHub](https://github.com/Hellohistory/EbookDataGeter)
+
+- [Gitee](https://gitee.com/etojsyc/EbookDataGeter)
   
 ## 主要特点  
   
