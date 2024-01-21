@@ -17,7 +17,7 @@ if sys.platform == "win32":
 
 setup(
     name="EbookDataGeter",
-    version="1.1",
+    version="1.2",
     description="EbookDataGeter自由开源",
     options={"build_exe": build_exe_options},
     executables=[Executable("main.py", base=base, icon="logo.ico")]

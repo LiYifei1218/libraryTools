@@ -1,5 +1,5 @@
 import tkinter as tk
-import re  # 导入正则表达式模块
+import re
 from tkinter import messagebox, scrolledtext, filedialog
 import threading
 import nlc_isbn
