@@ -24,7 +24,6 @@ def search_isbn(isbn):
     search_url = f"https://www.shukui.net/so/search.php?q={isbn}"
 
     try:
-        # 创建请求对象，使用headers模块中的get_headers函数获取头部
         req = urllib.request.Request(search_url, headers=headers.get_shukui_headers())
 
         # 发送请求到搜索页面

@@ -1,4 +1,5 @@
 import tkinter as tk
+import re  # 导入正则表达式模块
 from tkinter import messagebox, scrolledtext, filedialog
 import threading
 import nlc_isbn
@@ -69,7 +70,7 @@ def open_github():
 
 
 def open_gitee():
-    webbrowser.open("https://gitee.com/etojsyc/EbookDataGeter")
+    webbrowser.open("https://gitee.com/hellohistory/EbookDataGeter")
 
 
 def log_message(message):
@@ -78,6 +79,18 @@ def log_message(message):
 
 def update_status(message):
     status_label.config(text=message)
+
+
+def filter_input(event):
+    # 获取输入框的文本
+    input_text = entry_isbn.get()
+
+    # 使用正则表达式替换非数字字符为空字符串
+    filtered_text = re.sub(r'[^0-9]', '', input_text)
+
+    # 更新输入框的文本
+    entry_isbn.delete(0, tk.END)
+    entry_isbn.insert(0, filtered_text)
 
 
 # GUI样式配置
@@ -108,8 +121,12 @@ frame.grid(row=0, column=0, columnspan=2, sticky="ew", padx=10, pady=10)
 label_isbn = tk.Label(frame, text="请输入ISBN号码：", font=FONT_NORMAL, bg=BACKGROUND_COLOR)
 label_isbn.pack(side=tk.LEFT)
 
+# 创建输入框
 entry_isbn = tk.Entry(frame, font=FONT_NORMAL)
 entry_isbn.pack(side=tk.LEFT, padx=5)
+
+# 绑定输入过滤函数到文本变化事件
+entry_isbn.bind("<KeyRelease>", filter_input)
 
 button_search = tk.Button(frame, text="查询", command=search_isbn, bg=BUTTON_COLOR, font=FONT_BOLD)
 button_search.pack(side=tk.LEFT, padx=5)
