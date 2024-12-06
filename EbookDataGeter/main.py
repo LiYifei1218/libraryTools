@@ -66,11 +66,11 @@ def save_bookmarks_to_file():
 
 
 def open_github():
-    webbrowser.open("https://github.com/Hellohistory/EbookDataGeter")
+    webbrowser.open("https://github.com/Hellohistory/EbookDataTools")
 
 
 def open_gitee():
-    webbrowser.open("https://gitee.com/hellohistory/EbookDataGeter")
+    webbrowser.open("https://github.com/Hellohistory/EbookDataTools")
 
 
 def log_message(message):

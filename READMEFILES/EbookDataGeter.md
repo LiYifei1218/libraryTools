@@ -6,18 +6,6 @@ EbookDataGeter 是一个基于 [NLCISBNPlugin](https://github.com/DoiiarX/NLCISB
   
 在此向`NLCISBNPlugin`与`书葵网`的开发者表达感谢！  
 
-## 软件开源地址
-
-- [GitHub](https://github.com/Hellohistory/EbookDataGeter)
-
-- [Gitee](https://gitee.com/etojsyc/EbookDataGeter)
-
-## 其他项目地址
-
-这是本系列项目的第一个项目，一款本地化的图书信息检索工具
-
-- [EbookDatabase](https://github.com/Hellohistory/EbookDatabase)
-  
 ## 主要特点  
   
 - **图书信息检索**：通过输入 ISBN 号，快速获取图书的详细信息。  
@@ -96,6 +84,11 @@ python setup.py build
 ## 运行截图
 
 ![运行图片](image/image.png)
+
+## 更新历史
+
+- 1.2: 优化了ISBN输入框。
+
 
 ## 贡献
 
