@@ -11,6 +11,7 @@ EbookDataTools 项目提供了一系列工具，帮助用户高效处理图书�
 | 工具编号 | 工具名称        | 功能简介                        | 项目地址                                           | 说明文件地址                            |
 |------|-------------|-----------------------------|------------------------------------------------|-----------------------------------|
 | 0001 | EbookDataGeter   | EbookDataGeter 是一个基于 NLCISBNPlugin 的改进项目，提供了简单好用的中国国家图书馆ISBN检索  | [EbookDataGeter](EbookDataGeter)              | [EbookDataGeter.md](READMEFILES/EbookDataGeter.md) |
+| 0002 | EbookDataRename | EbookDataRename 是一个用于批量重命名电子书数据的工具，支持从 .uvz 到 .zip 的文件扩展名更改，以及从简体中文转换为繁体中文的繁简转换。 | [EbookDataRename](EbookDataRename)            | [EbookDataRename.md](READMEFILES/EbookDataRename.md) |
 
 
 ### 使用说明
